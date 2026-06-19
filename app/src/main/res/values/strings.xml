@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Anime Catalog</string>
+    <string name="detail_title">Detail Anime</string>
+    <string name="favorites_title">Favorit</string>
+    <string name="nav_anime">Anime</string>
+    <string name="nav_favorites">Favorit</string>
+    <string name="score_format">⭐ %.2f</string>
+    <string name="rank_format">Rank #%d</string>
+    <string name="popularity_format">Popularity #%d</string>
+    <string name="episodes_format">%s eps</string>
+    <string name="empty_anime">Tidak ada anime ditemukan</string>
+    <string name="empty_favorites">Belum ada anime favorit</string>
+    <string name="no_synopsis">Tidak ada sinopsis tersedia</string>
+    <string name="poster_description">Poster anime</string>
+    <string name="toggle_favorite">Toggle favorit</string>
+    <string name="remove_favorite">Hapus dari favorit</string>
+    <string name="label_genres">Genre</string>
+    <string name="label_studios">Studio</string>
+    <string name="label_synopsis">Sinopsis</string>
+    <string name="retry">Coba Lagi</string>
+</resources>
