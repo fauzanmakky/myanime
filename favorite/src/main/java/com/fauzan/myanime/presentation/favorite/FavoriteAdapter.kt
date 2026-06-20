@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.fauzan.myanime.R
-import com.fauzan.myanime.databinding.ItemFavoriteAnimeBinding
 import com.fauzan.myanime.domain.model.Anime
+import com.fauzan.myanime.favorite.databinding.ItemFavoriteAnimeBinding
 
 class FavoriteAdapter(
     private val onItemClick: (Anime) -> Unit,

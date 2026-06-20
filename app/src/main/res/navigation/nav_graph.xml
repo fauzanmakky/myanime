@@ -30,8 +30,7 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.fauzan.myanime.presentation.favorite.FavoriteFragment"
-        android:label="@string/favorites_title"
-        tools:layout="@layout/fragment_favorite">
+        android:label="@string/favorites_title">
 
         <action
             android:id="@+id/action_favoriteFragment_to_animeDetailFragment"

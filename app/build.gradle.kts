@@ -40,9 +40,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    dynamicFeatures += ":favorite"
 }
 
 dependencies {
+    implementation(project(":core"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -67,26 +70,13 @@ dependencies {
     // Paging 3
     implementation(libs.paging.runtime)
 
-    // Room
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    implementation(libs.room.paging)
-    kapt(libs.room.compiler)
-
-    // Network
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging)
-    implementation(libs.gson)
-
     // Coroutines
     implementation(libs.coroutines.android)
 
     // Coil
     implementation(libs.coil)
 
-    // Arrow
+    // Arrow (used directly in ViewModels via Either)
     implementation(libs.arrow.core)
 
     testImplementation(libs.junit)
