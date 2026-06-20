@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.fauzan.myanime.R
 import com.fauzan.myanime.databinding.ItemAnimeBinding
-import com.fauzan.myanime.domain.model.Anime
+import com.fauzan.myanime.presentation.model.AnimeUiModel
 
 class AnimeAdapter(
-    private val onItemClick: (Anime) -> Unit,
-) : PagingDataAdapter<Anime, AnimeAdapter.AnimeViewHolder>(DIFF_CALLBACK) {
+    private val onItemClick: (AnimeUiModel) -> Unit,
+) : PagingDataAdapter<AnimeUiModel, AnimeAdapter.AnimeViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimeViewHolder {
         val binding = ItemAnimeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,7 +27,7 @@ class AnimeAdapter(
     inner class AnimeViewHolder(private val binding: ItemAnimeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(anime: Anime) {
+        fun bind(anime: AnimeUiModel) {
             with(binding) {
                 ivPoster.load(anime.imageUrl) {
                     crossfade(true)
@@ -48,11 +48,11 @@ class AnimeAdapter(
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Anime>() {
-            override fun areItemsTheSame(oldItem: Anime, newItem: Anime) =
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AnimeUiModel>() {
+            override fun areItemsTheSame(oldItem: AnimeUiModel, newItem: AnimeUiModel) =
                 oldItem.malId == newItem.malId
 
-            override fun areContentsTheSame(oldItem: Anime, newItem: Anime) =
+            override fun areContentsTheSame(oldItem: AnimeUiModel, newItem: AnimeUiModel) =
                 oldItem == newItem
         }
     }

@@ -3,10 +3,11 @@ package com.fauzan.myanime.presentation.anime_detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fauzan.myanime.domain.model.Anime
 import com.fauzan.myanime.domain.usecase.AddFavoriteUseCase
 import com.fauzan.myanime.domain.usecase.CheckFavoriteUseCase
 import com.fauzan.myanime.domain.usecase.RemoveFavoriteUseCase
+import com.fauzan.myanime.presentation.model.AnimeUiModel
+import com.fauzan.myanime.presentation.model.toDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +34,7 @@ class AnimeDetailViewModel @Inject constructor(
     val effect: SharedFlow<AnimeDetailEffect> = _effect.asSharedFlow()
 
     init {
-        val anime: Anime? = savedStateHandle["anime"]
+        val anime: AnimeUiModel? = savedStateHandle["anime"]
         anime?.let {
             _state.update { state -> state.copy(anime = it) }
             observeFavoriteStatus(it.malId)
@@ -59,7 +60,7 @@ class AnimeDetailViewModel @Inject constructor(
     }
 
     private fun addFavorite() {
-        val anime = _state.value.anime ?: return
+        val anime = _state.value.anime?.toDomain() ?: return
         viewModelScope.launch {
             addFavoriteUseCase(anime).collect { either ->
                 either.fold(
@@ -71,7 +72,7 @@ class AnimeDetailViewModel @Inject constructor(
     }
 
     private fun removeFavorite() {
-        val anime = _state.value.anime ?: return
+        val anime = _state.value.anime?.toDomain() ?: return
         viewModelScope.launch {
             removeFavoriteUseCase(anime.malId).collect { either ->
                 either.fold(

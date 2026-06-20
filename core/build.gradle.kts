@@ -51,8 +51,8 @@ dependencies {
     // Paging 3
     implementation(libs.paging.runtime)
 
-    // Arrow
-    implementation(libs.arrow.core)
+    // Arrow (api karena Either digunakan di public API domain layer)
+    api(libs.arrow.core)
 
     // Lifecycle
     implementation(libs.lifecycle.viewmodel)

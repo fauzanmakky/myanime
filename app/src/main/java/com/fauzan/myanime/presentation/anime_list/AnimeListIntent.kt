@@ -1,7 +1,7 @@
 package com.fauzan.myanime.presentation.anime_list
 
-import com.fauzan.myanime.domain.model.Anime
+import com.fauzan.myanime.presentation.model.AnimeUiModel
 
 sealed class AnimeListIntent {
-    data class OpenDetail(val anime: Anime) : AnimeListIntent()
+    data class OpenDetail(val anime: AnimeUiModel) : AnimeListIntent()
 }

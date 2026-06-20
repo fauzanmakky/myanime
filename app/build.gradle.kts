@@ -66,6 +66,7 @@ dependencies {
     // Navigation
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.navigation.dynamic.features)
 
     // Paging 3
     implementation(libs.paging.runtime)

@@ -24,13 +24,14 @@
 
         <argument
             android:name="anime"
-            app:argType="com.fauzan.myanime.domain.model.Anime" />
+            app:argType="com.fauzan.myanime.presentation.model.AnimeUiModel" />
     </fragment>
 
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.fauzan.myanime.presentation.favorite.FavoriteFragment"
-        android:label="@string/favorites_title">
+        android:label="@string/favorites_title"
+        app:moduleName="favorite">
 
         <action
             android:id="@+id/action_favoriteFragment_to_animeDetailFragment"

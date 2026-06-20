@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fauzan.myanime.domain.usecase.GetFavoriteAnimeUseCase
 import com.fauzan.myanime.domain.usecase.RemoveFavoriteUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.fauzan.myanime.presentation.model.toUiModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -13,10 +13,8 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class FavoriteViewModel @Inject constructor(
+class FavoriteViewModel(
     private val getFavoriteAnimeUseCase: GetFavoriteAnimeUseCase,
     private val removeFavoriteUseCase: RemoveFavoriteUseCase,
 ) : ViewModel() {
@@ -50,7 +48,7 @@ class FavoriteViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            favoriteList = animeList,
+                            favoriteList = animeList.map { anime -> anime.toUiModel() },
                             isEmpty = animeList.isEmpty(),
                             error = null,
                         )

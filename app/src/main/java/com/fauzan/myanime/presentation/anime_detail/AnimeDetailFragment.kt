@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import coil.load
 import com.fauzan.myanime.R
 import com.fauzan.myanime.databinding.FragmentAnimeDetailBinding
-import com.fauzan.myanime.domain.model.Anime
+import com.fauzan.myanime.presentation.model.AnimeUiModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -73,7 +73,7 @@ class AnimeDetailFragment : Fragment() {
         }
     }
 
-    private fun bindAnime(anime: Anime) {
+    private fun bindAnime(anime: AnimeUiModel) {
         with(binding) {
             ivPoster.load(anime.imageUrl) {
                 crossfade(true)

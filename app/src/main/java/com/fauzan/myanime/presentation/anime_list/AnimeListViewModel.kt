@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.fauzan.myanime.domain.model.Anime
-import com.fauzan.myanime.domain.usecase.GetPagedAnimeUseCase
+import androidx.paging.map
+import com.fauzan.myanime.data.repository.AnimePagingRepository
+import com.fauzan.myanime.presentation.model.AnimeUiModel
+import com.fauzan.myanime.presentation.model.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -14,16 +16,18 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AnimeListViewModel @Inject constructor(
-    private val getPagedAnimeUseCase: GetPagedAnimeUseCase,
+    animePagingRepository: AnimePagingRepository,
 ) : ViewModel() {
 
-    val animeList: Flow<PagingData<Anime>> = getPagedAnimeUseCase()
+    val animeList: Flow<PagingData<AnimeUiModel>> = animePagingRepository.getPagedAnime()
+        .map { pagingData -> pagingData.map { it.toUiModel() } }
         .cachedIn(viewModelScope)
 
     private val _state = MutableStateFlow(AnimeListState.initial())

@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.fauzan.myanime.R
-import com.fauzan.myanime.domain.model.Anime
 import com.fauzan.myanime.favorite.databinding.ItemFavoriteAnimeBinding
+import com.fauzan.myanime.presentation.model.AnimeUiModel
 
 class FavoriteAdapter(
-    private val onItemClick: (Anime) -> Unit,
+    private val onItemClick: (AnimeUiModel) -> Unit,
     private val onRemoveClick: (Int) -> Unit,
-) : ListAdapter<Anime, FavoriteAdapter.FavoriteViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<AnimeUiModel, FavoriteAdapter.FavoriteViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val binding = ItemFavoriteAnimeBinding.inflate(
@@ -29,7 +29,7 @@ class FavoriteAdapter(
     inner class FavoriteViewHolder(private val binding: ItemFavoriteAnimeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(anime: Anime) {
+        fun bind(anime: AnimeUiModel) {
             with(binding) {
                 ivPoster.load(anime.imageUrl) {
                     crossfade(true)
@@ -46,11 +46,11 @@ class FavoriteAdapter(
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Anime>() {
-            override fun areItemsTheSame(oldItem: Anime, newItem: Anime) =
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AnimeUiModel>() {
+            override fun areItemsTheSame(oldItem: AnimeUiModel, newItem: AnimeUiModel) =
                 oldItem.malId == newItem.malId
 
-            override fun areContentsTheSame(oldItem: Anime, newItem: Anime) =
+            override fun areContentsTheSame(oldItem: AnimeUiModel, newItem: AnimeUiModel) =
                 oldItem == newItem
         }
     }

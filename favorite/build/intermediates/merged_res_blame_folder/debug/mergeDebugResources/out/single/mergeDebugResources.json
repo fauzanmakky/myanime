@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.fauzan.myanime.favorite-debug-4:/layout_fragment_favorite.xml.flat",
+        "source": "com.fauzan.myanime.favorite-main-6:/layout/fragment_favorite.xml"
+    },
+    {
+        "merged": "com.fauzan.myanime.favorite-debug-4:/layout_item_favorite_anime.xml.flat",
+        "source": "com.fauzan.myanime.favorite-main-6:/layout/item_favorite_anime.xml"
+    }
+]

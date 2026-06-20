@@ -12,15 +12,25 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fauzan.myanime.di.FavoriteEntryPoint
 import com.fauzan.myanime.favorite.databinding.FragmentFavoriteBinding
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
-    private val viewModel: FavoriteViewModel by viewModels()
+    private val viewModel: FavoriteViewModel by viewModels {
+        val entryPoint = EntryPointAccessors.fromApplication(
+            requireContext().applicationContext,
+            FavoriteEntryPoint::class.java,
+        )
+        FavoriteViewModelFactory(
+            entryPoint.getFavoriteAnimeUseCase(),
+            entryPoint.removeFavoriteUseCase(),
+        )
+    }
+
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = checkNotNull(_binding) { "Binding is null" }
 

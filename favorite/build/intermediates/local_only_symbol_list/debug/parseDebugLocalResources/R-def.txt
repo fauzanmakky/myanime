@@ -1,0 +1,16 @@
+R_DEF: Internal format may change without notice
+local
+id btn_remove
+id iv_poster
+id progress_bar
+id rv_favorite
+id toolbar
+id tv_empty
+id tv_error
+id tv_rank
+id tv_score
+id tv_status
+id tv_title
+layout fragment_favorite
+layout item_favorite_anime
+string favorites_title

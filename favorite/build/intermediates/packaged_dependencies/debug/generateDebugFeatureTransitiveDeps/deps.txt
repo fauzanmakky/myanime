@@ -1,0 +1,1 @@
+:favorite::debug;Capability: group='MyAnime', name='favorite'
