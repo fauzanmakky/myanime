@@ -21,7 +21,7 @@ object AppModule {
     @Provides
     fun provideAnimeDatabase(@ApplicationContext context: Context): AnimeDatabase =
         Room.databaseBuilder(context, AnimeDatabase::class.java, "anime.db")
-            .fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigration(false)
             .build()
 
     @Singleton
