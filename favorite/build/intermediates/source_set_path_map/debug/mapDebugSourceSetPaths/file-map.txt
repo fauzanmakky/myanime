@@ -1,8 +1,0 @@
-com.fauzan.myanime.favorite-pngs-0 /Users/majoo/AndroidStudioProjects/MyAnime/favorite/build/generated/res/pngs/debug
-com.fauzan.myanime.favorite-resValues-1 /Users/majoo/AndroidStudioProjects/MyAnime/favorite/build/generated/res/resValues/debug
-com.fauzan.myanime.favorite-updated_navigation_xml-2 /Users/majoo/AndroidStudioProjects/MyAnime/favorite/build/generated/updated_navigation_xml/debug
-com.fauzan.myanime.favorite-packageDebugResources-3 /Users/majoo/AndroidStudioProjects/MyAnime/favorite/build/intermediates/incremental/debug/packageDebugResources/merged.dir
-com.fauzan.myanime.favorite-packageDebugResources-4 /Users/majoo/AndroidStudioProjects/MyAnime/favorite/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
-com.fauzan.myanime.favorite-debug-5 /Users/majoo/AndroidStudioProjects/MyAnime/favorite/build/intermediates/merged_res/debug/mergeDebugResources
-com.fauzan.myanime.favorite-debug-6 /Users/majoo/AndroidStudioProjects/MyAnime/favorite/src/debug/res
-com.fauzan.myanime.favorite-main-7 /Users/majoo/AndroidStudioProjects/MyAnime/favorite/src/main/res
