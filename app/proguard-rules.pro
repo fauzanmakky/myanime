@@ -1,21 +1,70 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# ============================================================
+# Attributes – wajib untuk Gson, Retrofit, Hilt & stack trace
+# ============================================================
+-keepattributes *Annotation*, Signature, Exceptions, InnerClasses, EnclosingMethod
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# ============================================================
+# Gson – pertahankan field yang pakai @SerializedName agar
+# deserialisasi JSON tidak rusak setelah obfuscation
+# ============================================================
+-keepclassmembers,allowobfuscation class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
+-keep,allowobfuscation class com.fauzan.myanime.data.remote.dto.** { *; }
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# ============================================================
+# Retrofit
+# ============================================================
+-keep,allowobfuscation,allowshrinking interface retrofit2.Call
+-keep,allowobfuscation,allowshrinking class retrofit2.Response
+# Diperlukan agar suspend function Retrofit bisa resolve Continuation
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# ============================================================
+# OkHttp
+# ============================================================
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-keep class okhttp3.internal.publicsuffix.PublicSuffixDatabase { *; }
+
+# ============================================================
+# Room – entity & DAO harus utuh agar refleksi Room tidak gagal
+# ============================================================
+-keep @androidx.room.Entity class * { *; }
+-keep @androidx.room.Dao interface * { *; }
+-keep class * extends androidx.room.RoomDatabase { *; }
+
+# ============================================================
+# Kotlin Parcelize – CREATOR field dibutuhkan saat un-parceling
+# ============================================================
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+# ============================================================
+# Kotlin stdlib – dynamic feature modules load classes by original
+# name via their own classloader, so stdlib must not be renamed
+# ============================================================
+-keep class kotlin.** { *; }
+
+# ============================================================
+# Kotlin Coroutines
+# ============================================================
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
+}
+
+# ============================================================
+# Arrow Core (Either, sealed class Failure, dsb.)
+# ============================================================
+-keep class arrow.core.** { *; }
+
+# ============================================================
+# Hilt / Dagger – sebagian besar rules sudah dibundle oleh Hilt,
+# ini hanya untuk @HiltViewModel yang pakai refleksi runtime
+# ============================================================
+-keepnames @dagger.hilt.android.lifecycle.HiltViewModel class * extends androidx.lifecycle.ViewModel
