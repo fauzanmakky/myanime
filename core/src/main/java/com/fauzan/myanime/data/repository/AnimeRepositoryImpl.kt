@@ -25,7 +25,7 @@ class AnimeRepositoryImpl @Inject constructor(
     private val animeApi: AnimeApi,
     private val animeDao: AnimeDao,
     private val animeDatabase: AnimeDatabase,
-) : AnimeRepository, AnimePagingRepository {
+) : AnimeRepository {
 
     override fun getTopAnime(): Flow<Either<Failure, List<Anime>>> = flow {
         try {

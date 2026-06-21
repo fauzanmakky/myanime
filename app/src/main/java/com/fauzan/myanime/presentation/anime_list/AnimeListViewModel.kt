@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.fauzan.myanime.data.repository.AnimePagingRepository
+import com.fauzan.myanime.domain.usecase.GetPagedAnimeUseCase
 import com.fauzan.myanime.presentation.model.AnimeUiModel
 import com.fauzan.myanime.presentation.model.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,10 +23,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AnimeListViewModel @Inject constructor(
-    animePagingRepository: AnimePagingRepository,
+    getPagedAnimeUseCase: GetPagedAnimeUseCase,
 ) : ViewModel() {
 
-    val animeList: Flow<PagingData<AnimeUiModel>> = animePagingRepository.getPagedAnime()
+    val animeList: Flow<PagingData<AnimeUiModel>> = getPagedAnimeUseCase()
         .map { pagingData -> pagingData.map { it.toUiModel() } }
         .cachedIn(viewModelScope)
 
