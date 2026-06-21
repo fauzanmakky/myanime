@@ -1,6 +1,7 @@
 package com.fauzan.myanime
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -40,5 +41,11 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as DynamicNavHostFragment
         navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.bottomNavigation.visibility = when (destination.id) {
+                R.id.animeDetailFragment -> View.GONE
+                else -> View.VISIBLE
+            }
+        }
     }
 }
