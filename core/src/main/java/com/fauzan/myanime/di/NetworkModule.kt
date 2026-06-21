@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -23,7 +24,15 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
+    fun provideCertificatePinner(): CertificatePinner = CertificatePinner.Builder()
+        .add("api.jikan.moe", "sha256/n6+w9hrNxdy0btQSLhGCZVWpKCSL3rDNP8WMIEf9C8k=")
+        .add("api.jikan.moe", "sha256/AlSQhgtJirc8ahLyekmtX+Iw+v46yPYRLJt9Cq1GlB0=")
+        .build()
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(certificatePinner: CertificatePinner): OkHttpClient = OkHttpClient.Builder()
+        .certificatePinner(certificatePinner)
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .addInterceptor { chain ->
             var response = chain.proceed(chain.request())
