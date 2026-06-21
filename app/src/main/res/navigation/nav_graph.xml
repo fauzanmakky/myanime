@@ -31,7 +31,8 @@
         android:id="@+id/favoriteFragment"
         android:name="com.fauzan.myanime.presentation.favorite.FavoriteFragment"
         android:label="@string/favorites_title"
-        app:moduleName="favorite">
+        app:moduleName="favorite"
+        tools:ignore="InstantApps">
 
         <action
             android:id="@+id/action_favoriteFragment_to_animeDetailFragment"

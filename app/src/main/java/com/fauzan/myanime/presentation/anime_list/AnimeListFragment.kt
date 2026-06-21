@@ -54,6 +54,7 @@ class AnimeListFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.rvAnime.apply {
             layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
             this.adapter = this@AnimeListFragment.adapter.withLoadStateFooter(
                 footer = AnimeLoadStateAdapter { this@AnimeListFragment.adapter.retry() }
             )
@@ -143,6 +144,7 @@ class AnimeListFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.rvAnime.adapter = null
         _binding = null
     }
 }

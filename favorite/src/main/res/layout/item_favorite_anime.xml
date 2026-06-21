@@ -69,7 +69,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/remove_favorite"
             android:src="@drawable/ic_delete"
-            android:tint="#F44336" />
+            app:tint="#F44336" />
 
     </LinearLayout>
 

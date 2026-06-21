@@ -1,5 +1,6 @@
 package com.fauzan.myanime.di
 
+import com.fauzan.myanime.core.BuildConfig
 import com.fauzan.myanime.data.remote.AnimeApi
 import com.google.gson.Gson
 import dagger.Module
@@ -31,10 +32,13 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(certificatePinner: CertificatePinner): OkHttpClient = OkHttpClient.Builder()
-        .certificatePinner(certificatePinner)
-        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-        .addInterceptor { chain ->
+    fun provideOkHttpClient(certificatePinner: CertificatePinner): OkHttpClient {
+        val builder = OkHttpClient.Builder()
+            .certificatePinner(certificatePinner)
+        if (BuildConfig.DEBUG) {
+            builder.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        }
+        return builder.addInterceptor { chain ->
             var response = chain.proceed(chain.request())
             if (response.code == 429) {
                 response.close()
@@ -44,6 +48,7 @@ object NetworkModule {
             response
         }
         .build()
+    }
 
     @Singleton
     @Provides

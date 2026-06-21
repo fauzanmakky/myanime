@@ -4,12 +4,12 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.kotlin.parcelize)
-    id("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.fauzan.myanime"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.fauzan.myanime"
@@ -64,8 +64,8 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.hilt.compiler)
 
     // Navigation
     implementation(libs.navigation.fragment)
@@ -83,6 +83,8 @@ dependencies {
 
     // Arrow (used directly in ViewModels via Either)
     implementation(libs.arrow.core)
+
+    debugImplementation(libs.leakcanary)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
