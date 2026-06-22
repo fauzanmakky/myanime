@@ -104,8 +104,6 @@ dependencies {
     // Arrow (used directly in ViewModels via Either)
     implementation(libs.arrow.core)
 
-    debugImplementation(libs.leakcanary)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

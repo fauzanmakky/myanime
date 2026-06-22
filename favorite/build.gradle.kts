@@ -18,6 +18,11 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildTypes {
+        debug {
+            isDebuggable = false
+        }
+    }
     buildFeatures {
         viewBinding = true
     }

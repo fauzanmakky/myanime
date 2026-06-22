@@ -4,8 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fauzan.myanime.domain.usecase.GetFavoriteAnimeUseCase
 import com.fauzan.myanime.domain.usecase.RemoveFavoriteUseCase
+import javax.inject.Inject
 
-class FavoriteViewModelFactory(
+class FavoriteViewModelFactory @Inject constructor(
     private val getFavoriteAnimeUseCase: GetFavoriteAnimeUseCase,
     private val removeFavoriteUseCase: RemoveFavoriteUseCase,
 ) : ViewModelProvider.Factory {

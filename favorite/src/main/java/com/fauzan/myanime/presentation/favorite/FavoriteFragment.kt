@@ -1,5 +1,6 @@
 package com.fauzan.myanime.presentation.favorite
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,24 +13,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fauzan.myanime.di.DaggerFavoriteComponent
 import com.fauzan.myanime.di.FavoriteEntryPoint
 import com.fauzan.myanime.favorite.databinding.FragmentFavoriteBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.EntryPointAccessors
+import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 class FavoriteFragment : Fragment() {
 
-    private val viewModel: FavoriteViewModel by viewModels {
-        val entryPoint = EntryPointAccessors.fromApplication(
-            requireContext().applicationContext,
-            FavoriteEntryPoint::class.java,
-        )
-        FavoriteViewModelFactory(
-            entryPoint.getFavoriteAnimeUseCase(),
-            entryPoint.removeFavoriteUseCase(),
-        )
-    }
+    @Inject
+    lateinit var viewModelFactory: FavoriteViewModelFactory
+
+    private val viewModel: FavoriteViewModel by viewModels { viewModelFactory }
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = checkNotNull(_binding) { "Binding is null" }
@@ -43,6 +40,15 @@ class FavoriteFragment : Fragment() {
                 viewModel.processIntent(FavoriteIntent.RemoveFavorite(malId))
             },
         )
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val entryPoint = EntryPointAccessors.fromApplication(
+            context.applicationContext,
+            FavoriteEntryPoint::class.java,
+        )
+        DaggerFavoriteComponent.factory().create(entryPoint).inject(this)
     }
 
     override fun onCreateView(
