@@ -68,3 +68,10 @@
 # ini hanya untuk @HiltViewModel yang pakai refleksi runtime
 # ============================================================
 -keepnames @dagger.hilt.android.lifecycle.HiltViewModel class * extends androidx.lifecycle.ViewModel
+
+# ============================================================
+# SQLCipher – JNI bridge dan native bindings wajib utuh
+# ============================================================
+-keep class net.sqlcipher.** { *; }
+-keep class net.sqlcipher.database.** { *; }
+-dontwarn net.sqlcipher.**
