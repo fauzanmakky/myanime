@@ -21,6 +21,20 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            val keystorePath = System.getenv("CM_KEYSTORE_PATH") ?: findProperty("KEYSTORE_PATH") as String
+            val keystorePassword = System.getenv("CM_KEYSTORE_PASSWORD") ?: findProperty("KEYSTORE_PASSWORD") as String
+            var keyAlias = System.getenv("CM_KEY_ALIAS") ?: findProperty("KEY_ALIAS") as String
+            var keyPassword = System.getenv("CM_KEY_PASSWORD") ?: findProperty("KEY_PASSWORD") as String
+
+            storeFile = file(keystorePath)
+            storePassword = keystorePassword
+            keyAlias = keyAlias
+            keyPassword = keyPassword
+        }
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false

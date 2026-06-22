@@ -6,7 +6,10 @@ plugins {
 
 android {
     namespace = "com.fauzan.myanime.favorite"
-    compileSdk = 35
+    compileSdk = 36
+    defaultConfig {
+        minSdk = 24
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
