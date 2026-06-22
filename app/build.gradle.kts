@@ -37,12 +37,8 @@ android {
 
     buildTypes {
         debug {
-            isDebuggable = false
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            isDebuggable = true
+            isMinifyEnabled = false
         }
         release {
             isMinifyEnabled = true
@@ -103,6 +99,8 @@ dependencies {
 
     // Arrow (used directly in ViewModels via Either)
     implementation(libs.arrow.core)
+
+    debugImplementation(libs.leakcanary)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
