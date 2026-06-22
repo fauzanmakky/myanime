@@ -1,0 +1,14 @@
+workflows:
+  android-release:
+    name: Android Release
+
+    environment:
+      java: 17
+
+    scripts:
+      - ./gradlew clean
+      - ./gradlew bundleRelease
+
+    artifacts:
+      - app/build/outputs/**/*.aab
+      - app/build/outputs/**/*.apk
