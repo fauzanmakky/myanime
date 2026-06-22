@@ -60,4 +60,7 @@ dependencies {
 
     // Lifecycle
     implementation(libs.lifecycle.viewmodel)
+
+    // SQLCipher — encrypted database
+    implementation(libs.sqlcipher)
 }
